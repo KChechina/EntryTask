@@ -6,18 +6,21 @@ console.log("Let's rock")
 const uniqIds = new Set();
 
 function decodeFields(encoded, translations){
-    for (let key in encoded[i]){
-        if (key.endsWith('Id') && !='groupId' && !='service' && !='formatSize' && !='ca'){
-            for (let key in translations){
-                if (key.includes(encoded[i].[key])){
-                    encoded[i].[key] = [key];
-                    uniqIds.add(encoded[i].key);
+    for (let item of encoded){
+        for (let key in item){
+            if (key.includes('Id') && (key != 'groupId') && (key != 'service') && (key !='formatSize') && (key != 'ca')){
+                for (let key in translations){                                       
+                    if (key.includes(item[key])){
+                        item[key]= [key];
+                        uniqIds.add(item.key);
+                        encoded.Map()
+                        return [encoded, uniqIds];
+                    }
                 }
             }
         }
     }
 }
-
-const decoded = new Map(encoded);
+const decoded = new Map(decodeFields);
 
 console.log(decoded)
